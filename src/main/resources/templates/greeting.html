@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Hello, ' + ${name} + '!'" />
+<th:block th:each="image : ${omg}">
+    <p th:text="${image.getOwner().getUsername()}"></p>
+
+
+    <img th:src="${image.getDisplayUrl()}"/>
+    <p th:text="${image.getCaption()}"></p>
+    <p th:text="${image.getLikeCount()}"></p>
+    <!--<div th:switch="${image.getCommentPreview()}">-->
+        <!--<p th:case="${true}">User is an administrator</p>-->
+        <!--<p th:case="#{roles.manager}">User is a manager</p>-->
+        <!--<p th:case="*">User is some other thing</p>-->
+    <!--</div>-->
+    <!--<th:block th:each="comment : ${image.getCommentPreview().getNodes()}">-->
+<!---->
+    <!--</th:block>-->
+</th:block>
+</body>
+</html>
