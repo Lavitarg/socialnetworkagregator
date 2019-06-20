@@ -18,7 +18,7 @@ public class TestInstagram {
     public static void main(String[] args) throws IOException {
 
     }
-    public static ArrayList<Media> getPath() throws IOException {
+    public static ArrayList<Media> getPath(String name) throws IOException {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -29,7 +29,11 @@ public class TestInstagram {
                 .build();
         Instagram instagram = new Instagram(httpClient);
 
-        Account account = instagram.getAccountByUsername("outofqualm");
+        Account account = instagram.getAccountByUsername(name);
+        if(account.getIsPrivate()){
+            ArrayList<Media> list = new ArrayList<>();
+            return list;
+        }
         PageObject<Media> medias = account.getMedia();
         return (ArrayList<Media>) medias.getNodes();
 
