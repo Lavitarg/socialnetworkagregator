@@ -28,9 +28,6 @@ public class FollowersDownLoader  {
 
         List<InstagramUserSummary> users = userFollowers.getUsers();
         ArrayList<String> names  = users.stream().map(user -> user.getUsername()).collect(Collectors.toCollection(ArrayList<String>::new));
-        for(String name_1: names){
-            System.out.println( name_1);
-        }
         System.out.println(names.size());
         return names;
     }

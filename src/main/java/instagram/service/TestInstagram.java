@@ -13,6 +13,9 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import static instagram.controller.GreetingController.currentTime;
 
 public class TestInstagram {
     public static void main(String[] args) throws IOException {
@@ -30,12 +33,24 @@ public class TestInstagram {
         Instagram instagram = new Instagram(httpClient);
 
         Account account = instagram.getAccountByUsername(name);
-        if(account.getIsPrivate()){
-            ArrayList<Media> list = new ArrayList<>();
-            return list;
-        }
         PageObject<Media> medias = account.getMedia();
-        return (ArrayList<Media>) medias.getNodes();
+        ArrayList<Media> path = (ArrayList<Media>) medias.getNodes();
+        if(path == null || path.size() == 0) return new ArrayList<Media>();
+        path = path.stream().filter(media -> media.getTakenAtTimestamp() >= currentTime).collect(Collectors.toCollection(ArrayList::new));
+        path = path.stream().map(media -> {
+            try {
+                String result = "https://www.instagram.com/p/" + media.getShortcode();
+                Media media1 = instagram.getMediaByCode(media.getShortcode());
+                return media1;
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
+            return media;
+        }).collect(Collectors.toCollection(ArrayList::new));
+        return path;
 
     }
 }

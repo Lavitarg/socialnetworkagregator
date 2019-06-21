@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handing Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Form</h1>
+<form action="#" th:action="@{/processForm}" th:object="${foo}" method="post">
+    <div th:each="name, iterStat : ${subs}">
+        <tr>
+    <td th:text="${iterStat.count}"></td>
+    <td th:text="${name}">Screen name</td>
+        </tr>
+    <p><input type="checkbox" th:field="*{checkedItems}" th:value="${name}" /></p>
+    </div>
+    <input type="submit" text="Add checked" />
+</form>
+</body>
+</html>

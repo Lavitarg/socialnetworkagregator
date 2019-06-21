@@ -5,23 +5,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="'Hello, ' + ${name} + '!'" />
 <th:block th:each="image : ${omg}">
-    <p th:text="${image.getOwner().getUsername()}"></p>
-
-
-    <img th:src="${image.getDisplayUrl()}"/>
-    <p th:text="${image.getCaption()}"></p>
-    <p th:text="${image.getLikeCount()}"></p>
-    <p th:text="${image.getTakenAtTimestamp()}"></p>
-    <!--<div th:switch="${image.getCommentPreview()}">-->
-    <!--<p th:case="${true}">User is an administrator</p>-->
-    <!--<p th:case="#{roles.manager}">User is a manager</p>-->
-    <!--<p th:case="*">User is some other thing</p>-->
-    <!--</div>-->
-    <!--<th:block th:each="comment : ${image.getCommentPreview().getNodes()}">-->
-    <!---->
-    <!--</th:block>-->
+    <!-<div th:switch="${image.getIsVideo()}">
+    <div th:case="${false}">
+        <p th:text="${image.getOwner().getUsername()}"></p>
+        <img th:src="${image.getDisplayUrl()}"/>
+        <p th:text="${image.getCaption()}"></p>
+        <p th:text="${image.getLikeCount()}"></p>
+        <p th:text="${#dates.format(image.getCreated(), 'dd-MMM-yyyy')}"></p>
+        <!--Photo-->
+    </div>
+    <div th:case="${true}">
+        <p th:text="${image.getOwner().getUsername()}"></p>
+        <video>
+            <source th:src="${image.getVideoUrl()}">
+        </video>
+        <p th:text="${image.getCaption()}"></p>
+        <p th:text="${image.getLikeCount()}"></p>
+        <p th:text="${#dates.format(image.getCreated(), 'dd-MMM-yyyy')}"></p>
+        <!--Video-->
+    </div>
+    </div>
 </th:block>
 </body>
 </html>
