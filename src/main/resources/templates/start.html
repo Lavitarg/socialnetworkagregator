@@ -8,20 +8,22 @@
 <th:block th:each="image : ${omg}">
     <!-<div th:switch="${image.getIsVideo()}">
     <div th:case="${false}">
-        <p th:text="${image.getOwner().getUsername()}"></p>
+        <h1 th:text="${image.getOwner().getUsername()}"></h1>
         <img th:src="${image.getDisplayUrl()}"/>
-        <p th:text="${image.getCaption()}"></p>
-        <p th:text="${image.getLikeCount()}"></p>
-        <p th:text="${#dates.format(image.getCreated(), 'dd-MMM-yyyy')}"></p>
+        <h2 th:text="${image.getCaption()}"></h2>
+        <tr>
+            <td th:text="${image.getLikeCount()}"></td>
+            <td th:text="${#dates.format(image.getCreated(), 'dd-MMM-yyyy')}"></td>
+        </tr>
         <!--Photo-->
     </div>
     <div th:case="${true}">
-        <p th:text="${image.getOwner().getUsername()}"></p>
+        <h1 th:text="${image.getOwner().getUsername()}"></h1>
         <video>
             <source th:src="${image.getVideoUrl()}">
         </video>
-        <p th:text="${image.getCaption()}"></p>
-        <p th:text="${image.getLikeCount()}"></p>
+        <h2 th:text="${image.getCaption()}"></h2>
+        <h3 th:text="${image.getLikeCount()}"></h3>
         <p th:text="${#dates.format(image.getCreated(), 'dd-MMM-yyyy')}"></p>
         <!--Video-->
     </div>

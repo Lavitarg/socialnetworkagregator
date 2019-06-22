@@ -27,8 +27,9 @@ public class FollowersDownLoader  {
         InstagramGetUserFollowersResult userFollowers = instagram.sendRequest(new InstagramGetUserFollowingRequest(userResult.getUser().getPk()));
 
         List<InstagramUserSummary> users = userFollowers.getUsers();
-        ArrayList<String> names  = users.stream().map(user -> user.getUsername()).collect(Collectors.toCollection(ArrayList<String>::new));
-        System.out.println(names.size());
+        ArrayList<String> names  = users.stream()
+                .map(user -> user.getUsername())
+                .collect(Collectors.toCollection(ArrayList<String>::new));
         return names;
     }
 }

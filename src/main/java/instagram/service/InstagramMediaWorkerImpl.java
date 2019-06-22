@@ -5,23 +5,24 @@ import me.postaddict.instagram.scraper.cookie.CookieHashSet;
 import me.postaddict.instagram.scraper.cookie.DefaultCookieJar;
 import me.postaddict.instagram.scraper.interceptor.ErrorInterceptor;
 import me.postaddict.instagram.scraper.model.Account;
-import me.postaddict.instagram.scraper.model.Comment;
 import me.postaddict.instagram.scraper.model.Media;
 import me.postaddict.instagram.scraper.model.PageObject;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import static instagram.controller.GreetingController.currentTime;
+@Service
+public class InstagramMediaWorkerImpl implements InstagramMediaWorker{
 
-public class TestInstagram {
-    public static void main(String[] args) throws IOException {
-
-    }
-    public static ArrayList<Media> getPath(String name) throws IOException {
+    @Override
+    public List<Media> getMedia(String name) throws IOException {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -35,8 +36,8 @@ public class TestInstagram {
         Account account = instagram.getAccountByUsername(name);
         PageObject<Media> medias = account.getMedia();
         ArrayList<Media> path = (ArrayList<Media>) medias.getNodes();
-        if(path == null || path.size() == 0) return new ArrayList<Media>();
-        path = path.stream().filter(media -> media.getTakenAtTimestamp() >= currentTime).collect(Collectors.toCollection(ArrayList::new));
+        if(path == null || path.size() == 0) return Collections.emptyList();
+        path = path.stream().filter(media -> media.getTakenAtTimestamp() >= this.getDate()).collect(Collectors.toCollection(ArrayList::new));
         path = path.stream().map(media -> {
             try {
                 String result = "https://www.instagram.com/p/" + media.getShortcode();
@@ -51,6 +52,11 @@ public class TestInstagram {
             return media;
         }).collect(Collectors.toCollection(ArrayList::new));
         return path;
+    }
 
+    @Override
+    public long getDate() {
+        Date date = new Date();
+        return date.getTime()- 20 * 24 * 60 * 60 * 1000;
     }
 }
