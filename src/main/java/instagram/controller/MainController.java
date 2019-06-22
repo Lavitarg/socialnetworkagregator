@@ -1,8 +1,9 @@
 package instagram.controller;
 
 
+import instagram.model.User;
 import instagram.service.FollowersDownLoader;
-import instagram.model.Login_Helper;
+import instagram.model.SubsChangeObject;
 import instagram.service.InstagramMediaWorker;
 import me.postaddict.instagram.scraper.model.Media;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class GreetingController {
+public class MainController {
     @Autowired
-    InstagramMediaWorker instagramMediaWorker;
+    private InstagramMediaWorker instagramMediaWorker;
+
+
+    @GetMapping(value = "/")
+    public String main(Model model){
+        return "main";
+    }
 
     @GetMapping(value = "/greeting")
     public String greeting(Model model) throws IOException {
-        model.addAttribute("helper", new Login_Helper());
+        model.addAttribute("helper", new SubsChangeObject());
         return "greeting";
     }
 
 
     @PostMapping(value = "/greeting")
     public String greetingSubmit(
-            @ModelAttribute Login_Helper helper, Model model) throws IOException {
+            @ModelAttribute SubsChangeObject helper, Model model) throws IOException {
         String login = helper.getLogin();
         String password = helper.getPassword();
         FollowersDownLoader fd = new FollowersDownLoader();
