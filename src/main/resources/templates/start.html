@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<th:block th:each="image : ${omg}">
+    <!-<div th:switch="${image.getIsVideo()}">
+    <div th:case="${false}">
+        <h1 th:text="${image.getOwner().getUsername()}"></h1>
+        <img th:src="${image.getDisplayUrl()}"/>
+        <h2 th:text="${image.getCaption()}"></h2>
+        <tr>
+            <td th:text="${image.getLikeCount()}"></td>
+            <td th:text="${#dates.format(image.getCreated(), 'dd-MMM-yyyy')}"></td>
+        </tr>
+        <!--Photo-->
+    </div>
+    <div th:case="${true}">
+        <h1 th:text="${image.getOwner().getUsername()}"></h1>
+        <video>
+            <source th:src="${image.getVideoUrl()}">
+        </video>
+        <h2 th:text="${image.getCaption()}"></h2>
+        <h3 th:text="${image.getLikeCount()}"></h3>
+        <p th:text="${#dates.format(image.getCreated(), 'dd-MMM-yyyy')}"></p>
+        <!--Video-->
+    </div>
+    </div>
+</th:block>
+</body>
+</html>
