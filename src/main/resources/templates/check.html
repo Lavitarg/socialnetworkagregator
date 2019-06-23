@@ -7,13 +7,13 @@
 <body>
 <h1>Form</h1>
 <form action="#" th:action="@{/processForm}" th:object="${foo}" method="post">
+    <tr>
     <div th:each="name, iterStat : ${subs}">
-        <tr>
     <td th:text="${iterStat.count}"></td>
     <td th:text="${name}">Screen name</td>
-        </tr>
     <p><input type="checkbox" th:field="*{checkedItems}" th:value="${name}" /></p>
     </div>
+    </tr>
     <input type="submit" text="Add checked" />
 </form>
 </body>
