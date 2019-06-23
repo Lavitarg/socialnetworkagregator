@@ -15,14 +15,16 @@ import java.util.Collections;
 @Controller
 public class RegistrationController {
     @Autowired
-    UserRepo userRepo;
+    private UserRepo userRepo;
+
     @GetMapping(value = "/registration")
     public String registration(){
         return "registration";
     }
+
     @PostMapping(value = "/registration")
     public String addUser(User user, Model model){
-        User userByName = userRepo.findUserByUsername(user.getUsername());
+        User userByName = userRepo.findByUsername(user.getUsername());
         if(userByName != null){
             model.addAttribute("message","User exists");
             return "registration";

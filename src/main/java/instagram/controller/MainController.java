@@ -1,16 +1,18 @@
 package instagram.controller;
 
 
-import instagram.model.User;
+import instagram.dao.InstaProfileRepo;
+import instagram.dao.SubscribersRepo;
+import instagram.model.*;
 import instagram.service.FollowersDownLoader;
-import instagram.model.SubsChangeObject;
+import instagram.service.InstagramFollowersWorker;
 import instagram.service.InstagramMediaWorker;
 import me.postaddict.instagram.scraper.model.Media;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import instagram.model.SubsFilter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +22,12 @@ import java.util.List;
 public class MainController {
     @Autowired
     private InstagramMediaWorker instagramMediaWorker;
-
+    @Autowired
+    private InstagramFollowersWorker followersWorker;
+    @Autowired
+    private InstaProfileRepo instaProfileRepo;
+    @Autowired
+    private SubscribersRepo subscribersRepo;
 
     @GetMapping(value = "/")
     public String main(Model model){
@@ -35,26 +42,38 @@ public class MainController {
 
 
     @PostMapping(value = "/greeting")
-    public String greetingSubmit(
+    public String greetingSubmit(@AuthenticationPrincipal User user,
             @ModelAttribute SubsChangeObject helper, Model model) throws IOException {
         String login = helper.getLogin();
+        InstaUserFilters profileByLogin = instaProfileRepo.findByLogin(login);
+        if(profileByLogin == null){
+            InstaUserFilters userFilters = new InstaUserFilters(login,user);
+            instaProfileRepo.save(userFilters);
+        }
         String password = helper.getPassword();
-        FollowersDownLoader fd = new FollowersDownLoader();
-        List<String> subscribers = fd.getFollowers(login, password);
+        List<String> subscribers = followersWorker.getFollowers(login, password);
         model.addAttribute("foo", new SubsFilter());
         model.addAttribute("subs", subscribers);
         return "check";
     }
 
     @PostMapping(value = "/processForm")
-    public String processForm(
+    public String processForm(@AuthenticationPrincipal User user,
             @ModelAttribute(value = "foo") SubsFilter foo, Model model) throws IOException {
         // Get value of checked item.
-
+        InstaUserFilters instaUserFilters = instaProfileRepo.findByUserId(user.getId());
+        model.addAttribute("login",instaUserFilters.getLogin());
         List<String> checkedItems = foo.getCheckedItems();
+        for(String nick: checkedItems){
+            if(subscribersRepo.findByName(nick) == null){
+                SubscribeItem item = new SubscribeItem(nick,instaUserFilters);
+                subscribersRepo.save(item);
+            }
+        }
+        List<SubscribeItem> subscribeItems = subscribersRepo.findAllByProfileId(instaUserFilters.getId());
         List<Media> result = new ArrayList<>();
-        for (String nick : checkedItems) {
-            List<Media> mediaList = instagramMediaWorker.getMedia(nick);
+        for (SubscribeItem nick : subscribeItems) {
+            List<Media> mediaList = instagramMediaWorker.getMedia(nick.getName());
             result.addAll(mediaList);
         }
         model.addAttribute("omg", result);

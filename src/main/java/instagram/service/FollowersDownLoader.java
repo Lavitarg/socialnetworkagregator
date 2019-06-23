@@ -7,17 +7,16 @@ import org.brunocvcunha.instagram4j.requests.InstagramSearchUsernameRequest;
 import org.brunocvcunha.instagram4j.requests.payload.InstagramGetUserFollowersResult;
 import org.brunocvcunha.instagram4j.requests.payload.InstagramSearchUsernameResult;
 import org.brunocvcunha.instagram4j.requests.payload.InstagramUserSummary;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-public class FollowersDownLoader  {
-    public FollowersDownLoader() {
-
-    }
-    public ArrayList<String> getFollowers(String name, String password) throws IOException {
+@Service
+public class FollowersDownLoader implements InstagramFollowersWorker  {
+    @Override
+    public List<String> getFollowers(String name, String password) throws IOException {
         Instagram4j instagram = Instagram4j.builder().username(name).password(password).build();
         instagram.setup();
         instagram.login();
