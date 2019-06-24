@@ -41,6 +41,7 @@ public class InstagramMediaWorkerImpl implements InstagramMediaWorker{
                 .stream()
                 .filter(media -> media.getTakenAtTimestamp() >= this.getDate())
                 .collect(Collectors.toList());
+        //не всегда достаются ссылки на video,поэтому приходится обрабатывать Runtime очень плохо
         resultMedias = resultMedias
                 .stream()
                 .map(media -> {

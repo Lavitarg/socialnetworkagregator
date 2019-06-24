@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>ChangeSubsForm</h1>
+<h1 th:text="${text}"></h1>
 <form action="#" th:action="@{/newInstagramProfile}" th:object="${helper}" method="post">
-    <p>Login: <input type="text" th:field="*{login}" /></p>
+    <p>Login: <input type="text" th:field="*{name}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 <div>
