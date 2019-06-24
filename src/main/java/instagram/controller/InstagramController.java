@@ -31,22 +31,19 @@ public class InstagramController {
     private SubscribersRepo subscribersRepo;
 
 
-    @GetMapping(value = "/greeting")
-    public String greeting(Model model) throws IOException {
+    @GetMapping(value = "/filter")
+    public String greeting(@AuthenticationPrincipal User user,Model model) throws IOException {
+        InstaUserFilters instaUser = instaProfileRepo.findByUserId(user.getId());
+        model.addAttribute("log",instaUser.getLogin());
         model.addAttribute("helper", new SubsChangeObject());
-        return "greeting";
+        return "filter";
     }
 
 
-    @PostMapping(value = "/greeting")
+    @PostMapping(value = "/filter")
     public String greetingSubmit(@AuthenticationPrincipal User user,
                                  @ModelAttribute SubsChangeObject helper, Model model) throws IOException {
         String login = helper.getLogin();
-        InstaUserFilters profileByLogin = instaProfileRepo.findByLogin(login);
-        if(profileByLogin == null){
-            InstaUserFilters userFilters = new InstaUserFilters(login,user);
-            instaProfileRepo.save(userFilters);
-        }
         String password = helper.getPassword();
         List<String> subscribers = followersWorker.getFollowers(login, password);
         model.addAttribute("foo", new SubsFilter());
@@ -58,16 +55,16 @@ public class InstagramController {
     public String processForm(@AuthenticationPrincipal User user,
                               @ModelAttribute(value = "foo") SubsFilter foo, Model model) throws IOException {
         // Get value of checked item.
-        InstaUserFilters instaUserFilters = instaProfileRepo.findByUserId(user.getId());
-        model.addAttribute("login",instaUserFilters.getLogin());
+        InstaUserFilters instaUser = instaProfileRepo.findByUserId(user.getId());
+        model.addAttribute("login",instaUser.getLogin());
         List<String> checkedItems = foo.getCheckedItems();
         for(String nick: checkedItems){
             if(subscribersRepo.findByName(nick) == null){
-                SubscribeItem item = new SubscribeItem(nick,instaUserFilters);
+                SubscribeItem item = new SubscribeItem(nick,instaUser);
                 subscribersRepo.save(item);
             }
         }
-        return "tape";
+        return "redirect:/instagram";
     }
 
     @GetMapping(value = "/tape")

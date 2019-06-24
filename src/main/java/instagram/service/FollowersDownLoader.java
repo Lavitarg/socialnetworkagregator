@@ -26,9 +26,9 @@ public class FollowersDownLoader implements InstagramFollowersWorker  {
         InstagramGetUserFollowersResult userFollowers = instagram.sendRequest(new InstagramGetUserFollowingRequest(userResult.getUser().getPk()));
 
         List<InstagramUserSummary> users = userFollowers.getUsers();
-        ArrayList<String> names  = users.stream()
+        List<String> names  = users.stream()
                 .map(user -> user.getUsername())
-                .collect(Collectors.toCollection(ArrayList<String>::new));
+                .collect(Collectors.toList());
         return names;
     }
 }

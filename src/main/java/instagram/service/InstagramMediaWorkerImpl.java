@@ -34,8 +34,11 @@ public class InstagramMediaWorkerImpl implements InstagramMediaWorker{
         Instagram instagram = new Instagram(httpClient);
 
         Account account = instagram.getAccountByUsername(name);
+
         PageObject<Media> medias = account.getMedia();
+
         List<Media> resultMedias = (ArrayList<Media>) medias.getNodes();
+
         if(resultMedias == null || resultMedias.size() == 0) return Collections.emptyList();
         resultMedias = resultMedias
                 .stream()
