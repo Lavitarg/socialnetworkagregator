@@ -1,5 +1,6 @@
-package instagram.service;
+package instagram.service.implementation;
 
+import instagram.service.InstagramMediaWorker;
 import me.postaddict.instagram.scraper.Instagram;
 import me.postaddict.instagram.scraper.cookie.CookieHashSet;
 import me.postaddict.instagram.scraper.cookie.DefaultCookieJar;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class InstagramMediaWorkerImpl implements InstagramMediaWorker{
+public class InstagramMediaWorkerImpl implements InstagramMediaWorker {
     //public final String result = "https://www.instagram.com/p/";
     @Override
     public List<Media> getMedia(String name) throws IOException {
