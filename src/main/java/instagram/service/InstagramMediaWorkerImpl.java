@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class InstagramMediaWorkerImpl implements InstagramMediaWorker{
-
+    //public final String result = "https://www.instagram.com/p/";
     @Override
     public List<Media> getMedia(String name) throws IOException {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -35,12 +35,16 @@ public class InstagramMediaWorkerImpl implements InstagramMediaWorker{
 
         Account account = instagram.getAccountByUsername(name);
         PageObject<Media> medias = account.getMedia();
-        ArrayList<Media> path = (ArrayList<Media>) medias.getNodes();
-        if(path == null || path.size() == 0) return Collections.emptyList();
-        path = path.stream().filter(media -> media.getTakenAtTimestamp() >= this.getDate()).collect(Collectors.toCollection(ArrayList::new));
-        path = path.stream().map(media -> {
+        List<Media> resultMedias = (ArrayList<Media>) medias.getNodes();
+        if(resultMedias == null || resultMedias.size() == 0) return Collections.emptyList();
+        resultMedias = resultMedias
+                .stream()
+                .filter(media -> media.getTakenAtTimestamp() >= this.getDate())
+                .collect(Collectors.toList());
+        resultMedias = resultMedias
+                .stream()
+                .map(media -> {
             try {
-                String result = "https://www.instagram.com/p/" + media.getShortcode();
                 Media media1 = instagram.getMediaByCode(media.getShortcode());
                 return media1;
             } catch (IOException e) {
@@ -50,8 +54,8 @@ public class InstagramMediaWorkerImpl implements InstagramMediaWorker{
                 System.out.println(e.getMessage());
             }
             return media;
-        }).collect(Collectors.toCollection(ArrayList::new));
-        return path;
+        }).collect(Collectors.toList());
+        return resultMedias;
     }
 
     @Override
