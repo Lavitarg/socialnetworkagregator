@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>testpaper</groupId>
-    <artifactId>shit</artifactId>
+    <groupId>aggregator</groupId>
+    <artifactId>aggregator</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
@@ -80,7 +80,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
         </dependency>
 
     </dependencies>

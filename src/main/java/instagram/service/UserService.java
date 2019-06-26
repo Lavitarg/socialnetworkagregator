@@ -1,6 +1,6 @@
 package instagram.service;
 
-import instagram.dao.UserRepo;
+import instagram.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

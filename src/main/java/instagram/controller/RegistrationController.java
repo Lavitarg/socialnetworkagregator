@@ -1,6 +1,6 @@
 package instagram.controller;
 
-import instagram.dao.UserRepo;
+import instagram.repository.UserRepo;
 import instagram.model.Role;
 import instagram.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ValueConstants;
 
 import java.util.Collections;
 

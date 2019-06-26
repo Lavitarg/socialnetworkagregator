@@ -1,7 +1,7 @@
 package instagram.controller;
 
-import instagram.dao.InstaProfileRepo;
-import instagram.dao.SubscribersRepo;
+import instagram.repository.InstaProfileRepo;
+import instagram.repository.SubscribersRepo;
 import instagram.model.*;
 import instagram.service.InstagramFollowersWorker;
 import instagram.service.InstagramMediaWorker;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class InstagramController {
+public class InstaController {
     @Autowired
     private InstagramMediaWorker instagramMediaWorker;
     @Autowired

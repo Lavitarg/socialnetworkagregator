@@ -1,4 +1,4 @@
-package instagram.dao;
+package instagram.repository;
 
 import instagram.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class MainController {
+public class HomeController {
 
     @GetMapping(value = "/")
     public String main(Model model){
