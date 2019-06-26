@@ -1,5 +1,6 @@
-package instagram.service;
+package instagram.service.implementation;
 
+import instagram.service.InstagramFollowersWorker;
 import org.brunocvcunha.instagram4j.Instagram4j;
 import org.brunocvcunha.instagram4j.requests.InstagramGetUserFollowersRequest;
 import org.brunocvcunha.instagram4j.requests.InstagramGetUserFollowingRequest;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
-public class FollowersDownLoader implements InstagramFollowersWorker  {
+public class FollowersDownLoaderImpl implements InstagramFollowersWorker {
     @Override
     public List<String> getFollowers(String name, String password) throws IOException {
         Instagram4j instagram = Instagram4j.builder().username(name).password(password).build();
@@ -26,9 +27,9 @@ public class FollowersDownLoader implements InstagramFollowersWorker  {
         InstagramGetUserFollowersResult userFollowers = instagram.sendRequest(new InstagramGetUserFollowingRequest(userResult.getUser().getPk()));
 
         List<InstagramUserSummary> users = userFollowers.getUsers();
-        ArrayList<String> names  = users.stream()
+        List<String> names  = users.stream()
                 .map(user -> user.getUsername())
-                .collect(Collectors.toCollection(ArrayList<String>::new));
+                .collect(Collectors.toList());
         return names;
     }
 }
