@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Form</h1>
-<form action="#" th:action="@{/processForm}" th:object="${foo}" method="post">
+<form action="#" th:action="@{/processForm}" th:object="${filter}" method="post">
     <tr th:each="name, iterStat : ${subs}">
     <td th:text="${iterStat.count}"></td>
     <td th:text="${name}">Screen name</td>
