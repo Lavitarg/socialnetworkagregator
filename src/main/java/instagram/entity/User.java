@@ -1,4 +1,4 @@
-package instagram.model;
+package instagram.entity;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "usr")
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,16 +28,19 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
+
     // TODO: 23.06.2019
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
+
     // TODO: 23.06.2019
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
+
     // TODO: 23.06.2019
     @Override
     public boolean isCredentialsNonExpired() {

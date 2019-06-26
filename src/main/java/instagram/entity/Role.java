@@ -1,4 +1,4 @@
-package instagram.model;
+package instagram.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 

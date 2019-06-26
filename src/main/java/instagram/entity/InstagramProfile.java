@@ -1,28 +1,28 @@
-package instagram.model;
+package instagram.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
-@Table(name = "prf")
-public class InstaUserFilters {
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "instagram_profile")
+public class InstagramProfile {
     @Id
     @GeneratedValue
     private long id;
 
+    @NonNull
     private String login;
 
+    @NonNull
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public InstaUserFilters() {
-    }
-
-    public InstaUserFilters(String login, User user) {
+    public InstagramProfile(String login, User user) {
         this.login = login;
         this.user = user;
     }
