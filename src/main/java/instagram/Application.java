@@ -1,6 +1,6 @@
 
 
-package vk.app;
+package instagram;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
