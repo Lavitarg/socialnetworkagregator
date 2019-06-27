@@ -1,7 +1,7 @@
-package agregator.vk.service;
+package vk.service;
 
-import agregator.vk.model.ProfiledUserActor;
-import agregator.vk.repository.UsersRepository;
+import vk.model.ProfiledUserActor;
+import vk.repository.UsersRepository;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -11,8 +11,10 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.account.UserSettings;
 import org.springframework.beans.factory.annotation.Autowired;
+import vk.model.ProfiledUserActor;
+import vk.repository.UsersRepository;
 
-public class AuthorizationServiceImpl implements agregator.vk.service.AuthorizationService {
+public class AuthorizationServiceImpl implements vk.service.AuthorizationService {
     private final Integer appId = 7033540;
 
     private final String key = "VoDvwVOcnzTmuYgsi7FG";
@@ -40,14 +42,14 @@ public class AuthorizationServiceImpl implements agregator.vk.service.Authorizat
             UserSettings infoResponse = vk.account()
                     .getProfileInfo(new UserActor(authResponse.getUserId(), authResponse.getAccessToken()))
                     .execute();
-            ProfiledUserActor user = ProfiledUserActor.builder()
+            /*ProfiledUserActor user = ProfiledUserActor.builder()
                     .build()
                     .userId(authResponse.getUserId())
                     .accessToken(authResponse.getAccessToken())
                     .name(infoResponse.getFirstName() + " " + infoResponse.getLastName());
-            repository.save(user);
+            repository.save(user);*/
         } catch (ApiException apiException) {
-            throw new agregator.vk.service.UnableToAuthorizeException("Cannot get user's name.", apiException);
+            throw new UnableToAuthorizeException("Cannot get user's name.", apiException);
         } catch (ClientException clientException) {
             throw new UnableToAuthorizeException("Cannot get user's name.", clientException);
         }

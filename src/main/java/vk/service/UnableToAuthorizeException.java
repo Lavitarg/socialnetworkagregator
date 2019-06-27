@@ -1,4 +1,4 @@
-package agregator.vk.service;
+package vk.service;
 
 public class UnableToAuthorizeException extends RuntimeException{
 

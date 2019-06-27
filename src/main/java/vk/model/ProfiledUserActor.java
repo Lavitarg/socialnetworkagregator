@@ -1,12 +1,12 @@
-package agregator.vk.model;
+package vk.model;
 
 import com.vk.api.sdk.client.actors.UserActor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.Entity;
-
-@AllArgsConstructor
+@Data
 @Entity
 public class ProfiledUserActor extends UserActor {
 

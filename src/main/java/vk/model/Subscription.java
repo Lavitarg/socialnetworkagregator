@@ -1,4 +1,4 @@
-package agregator.vk.model;
+package vk.model;
 import lombok.AllArgsConstructor;
 import javax.persistence.Entity;
 
@@ -6,6 +6,6 @@ import javax.persistence.Entity;
 @Entity
 public class Subscription {
     private Integer id;
-    private SubscriptionType type;
+    private vk.model.SubscriptionType type;
     private String name;
 }

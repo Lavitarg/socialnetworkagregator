@@ -1,4 +1,4 @@
-package agregator.vk.model;
+package vk.model;
 
 public enum SubscriptionType {
     USER, GROUP;

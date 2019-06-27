@@ -1,6 +1,6 @@
-package agregator.vk.controller;
+package vk.controller;
 
-import agregator.vk.service.AuthorizationService;
+import vk.service.AuthorizationService;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
