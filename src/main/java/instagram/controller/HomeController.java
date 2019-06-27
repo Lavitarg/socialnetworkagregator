@@ -15,6 +15,11 @@ public class HomeController {
         return "main";
     }
 
+    @RequestMapping(value = "/sample",  method = RequestMethod.GET)
+    public String sample(Model model) {
+        return "SAMPLE";
+    }
+
     @GetMapping(value = "/home")
     public String home(@AuthenticationPrincipal User user,
                        Model model) {
