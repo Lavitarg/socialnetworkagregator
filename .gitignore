@@ -1,141 +1,108 @@
 # Created by .ignore support plugin (hsz.mobi)
-### Actionscript template
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+### Java template
+# Compiled class file
+*.class
 
-# Other files and folders
-.settings/
+# Log file
+*.log
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# BlueJ files
+*.ctxt
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-### NetBeans template
-**/nbproject/private/
-**/nbproject/Makefile-*.mk
-**/nbproject/Package-*.bash
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
-### C++ template
-# Prerequisites
-*.d
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+### JetBrains template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
-# Precompiled Headers
-*.gch
-*.pch
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Generated files
+.idea/**/contentModel.xml
 
-# Fortran module files
-*.mod
-*.smod
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
 
-# Executables
-*.exe
-*.out
-*.app
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
 
-### Linux template
-*~
+# CMake
+cmake-build-*/
 
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
 
-# KDE directory preferences
-.directory
+# File-based project format
+*.iws
 
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
+# IntelliJ
+out/
 
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
+# mpeltonen/sbt-idea plugin
+.idea_modules/
 
-### WebMethods template
-**/IntegrationServer/datastore/
-**/IntegrationServer/db/
-**/IntegrationServer/DocumentStore/
-**/IntegrationServer/lib/
-**/IntegrationServer/logs/
-**/IntegrationServer/replicate/
-**/IntegrationServer/sdk/
-**/IntegrationServer/support/
-**/IntegrationServer/update/
-**/IntegrationServer/userFtpRoot/
-**/IntegrationServer/web/
-**/IntegrationServer/WmRepository4/
-**/IntegrationServer/XAStore/
-**/IntegrationServer/packages/Wm*/
+# JIRA plugin
+atlassian-ide-plugin.xml
 
-### Windows template
-# Windows thumbnail cache files
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
+# Cursive Clojure plugin
+.idea/replstate.xml
 
-# Dump file
-*.stackdump
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
 
-# Folder config file
-[Dd]esktop.ini
+# Editor-based Rest Client
+.idea/httpRequests
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
 
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-### VisualStudioCode template
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-### Example user template template
-### Example user template
-
-# IntelliJ project files
-.idea
-*.iml
-out
-gen
-.idea/
-shit.iml
-src/test/
+### Maven template
 target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
