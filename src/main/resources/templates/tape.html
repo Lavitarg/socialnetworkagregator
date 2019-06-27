@@ -26,6 +26,7 @@
         <h2 th:text="${mediaItem.getCaption()}"></h2>
         <h3 th:text="${mediaItem.getLikeCount()}"></h3>
         <p th:text="${#dates.format(mediaItem.getCreated(), 'dd-MMM-yyyy')}"></p>
+        <a th:href="${'https://www.instagram.com/p/' + mediaItem.getShortcode()}">Here is a link, if no video on display</a>
         <!--Video-->
     </div>
     </div>
