@@ -1,4 +1,4 @@
-package vk.service;
+package instagram.service;
 
 public class UnableToAuthorizeException extends RuntimeException{
 

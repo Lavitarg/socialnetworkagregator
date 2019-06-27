@@ -1,14 +1,22 @@
-package vk.model;
+package instagram.model;
 
 import com.vk.api.sdk.client.actors.UserActor;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Data
 @Entity
+@Table(name = "actor")
 public class ProfiledUserActor extends UserActor {
+    @Id
+    @GeneratedValue
+    private Integer id;
+
 
     private String name;
 

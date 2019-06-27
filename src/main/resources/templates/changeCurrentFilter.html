@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Отметьте тех подписчиков, которых Вы больше не хотите видеть в своей ленте</h1>
+<h1>Отметьте те подписки, которых Вы больше не хотите видеть в своей ленте</h1>
 <form action="#" th:action="@{/oldSubs}" th:object="${filter}" method="post">
     <tr th:each="name, iterStat : ${subs}">
         <td th:text="${iterStat.count}"></td>

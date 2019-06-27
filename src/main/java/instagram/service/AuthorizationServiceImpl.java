@@ -1,7 +1,5 @@
-package vk.service;
+package instagram.service;
 
-import vk.model.ProfiledUserActor;
-import vk.repository.UsersRepository;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -10,11 +8,12 @@ import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.account.UserSettings;
+import instagram.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import vk.model.ProfiledUserActor;
-import vk.repository.UsersRepository;
+import org.springframework.stereotype.Service;
 
-public class AuthorizationServiceImpl implements vk.service.AuthorizationService {
+@Service
+public class AuthorizationServiceImpl implements AuthorizationService {
     private final Integer appId = 7033540;
 
     private final String key = "VoDvwVOcnzTmuYgsi7FG";

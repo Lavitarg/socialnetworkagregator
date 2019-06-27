@@ -1,8 +1,7 @@
-package vk.repository;
+package instagram.repository;
 
-import vk.model.ProfiledUserActor;
+import instagram.model.ProfiledUserActor;
 import org.springframework.data.jpa.repository.JpaRepository;
-import vk.model.ProfiledUserActor;
 
 import java.util.Optional;
 
