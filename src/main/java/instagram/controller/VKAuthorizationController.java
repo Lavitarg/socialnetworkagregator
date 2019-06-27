@@ -1,22 +1,15 @@
-package vk.controller;
+package instagram.controller;
 
-import vk.service.AuthorizationService;
-import com.vk.api.sdk.client.TransportClient;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
+import instagram.service.VKAuthorizationService;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
-import com.vk.api.sdk.objects.UserAuthResponse;
-import com.vk.api.sdk.objects.account.UserSettings;
-import com.vk.api.sdk.objects.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class AuthorizationController {
+public class VKAuthorizationController {
 
     private final Integer appId = 7033540;
 
@@ -26,7 +19,7 @@ public class AuthorizationController {
     private final String redirectUri = "http://localhost:8080/getcode";
 
     @Autowired
-    private AuthorizationService service;
+    private VKAuthorizationService service;
 
     @GetMapping (value = "/authorize")
     public String authorize(){

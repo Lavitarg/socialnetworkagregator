@@ -1,4 +1,4 @@
-package vk.model;
+package instagram.model;
 
 import com.vk.api.sdk.client.actors.UserActor;
 import lombok.AllArgsConstructor;
@@ -8,12 +8,12 @@ import lombok.Data;
 import javax.persistence.Entity;
 @Data
 @Entity
-public class ProfiledUserActor extends UserActor {
+public class VKProfiledUserActor extends UserActor {
 
     private String name;
 
     @Builder
-    public ProfiledUserActor(Integer userId, String accessToken, String firstname, String lastname) {
+    public VKProfiledUserActor(Integer userId, String accessToken, String firstname, String lastname) {
         super(userId, accessToken);
         this.name = name;
     }

@@ -1,11 +1,11 @@
-package vk.model;
+package instagram.model;
 import lombok.AllArgsConstructor;
 import javax.persistence.Entity;
 
 @AllArgsConstructor
 @Entity
-public class Subscription {
+public class VKSubscription {
     private Integer id;
-    private vk.model.SubscriptionType type;
+    private VKSubscriptionType type;
     private String name;
 }

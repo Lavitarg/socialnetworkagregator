@@ -1,7 +1,7 @@
-package vk.service;
+package instagram.service.impl;
 
-import vk.model.ProfiledUserActor;
-import vk.repository.UsersRepository;
+import instagram.Exeptions.UnableToAuthorizeException;
+import instagram.repository.VKUsersRepository;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -10,11 +10,10 @@ import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.account.UserSettings;
+import instagram.service.VKAuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import vk.model.ProfiledUserActor;
-import vk.repository.UsersRepository;
 
-public class AuthorizationServiceImpl implements vk.service.AuthorizationService {
+public class VKAuthorizationServiceImpl implements VKAuthorizationService {
     private final Integer appId = 7033540;
 
     private final String key = "VoDvwVOcnzTmuYgsi7FG";
@@ -22,7 +21,7 @@ public class AuthorizationServiceImpl implements vk.service.AuthorizationService
     private final String redirectUri = "http://localhost:8080/getcode";
 
     @Autowired
-    private UsersRepository repository;
+    private VKUsersRepository repository;
 
     @Override
     public void authorize(String code) {
@@ -42,7 +41,7 @@ public class AuthorizationServiceImpl implements vk.service.AuthorizationService
             UserSettings infoResponse = vk.account()
                     .getProfileInfo(new UserActor(authResponse.getUserId(), authResponse.getAccessToken()))
                     .execute();
-            /*ProfiledUserActor user = ProfiledUserActor.builder()
+            /*VKProfiledUserActor user = VKProfiledUserActor.builder()
                     .build()
                     .userId(authResponse.getUserId())
                     .accessToken(authResponse.getAccessToken())
