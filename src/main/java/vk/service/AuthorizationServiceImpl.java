@@ -12,7 +12,7 @@ import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.account.UserSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AuthorizationServiceImpl implements AuthorizationService{
+public class AuthorizationServiceImpl implements agregator.vk.service.AuthorizationService {
     private final Integer appId = 7033540;
 
     private final String key = "VoDvwVOcnzTmuYgsi7FG";
@@ -47,7 +47,7 @@ public class AuthorizationServiceImpl implements AuthorizationService{
                     .name(infoResponse.getFirstName() + " " + infoResponse.getLastName());
             repository.save(user);
         } catch (ApiException apiException) {
-            throw new UnableToAuthorizeException("Cannot get user's name.", apiException);
+            throw new agregator.vk.service.UnableToAuthorizeException("Cannot get user's name.", apiException);
         } catch (ClientException clientException) {
             throw new UnableToAuthorizeException("Cannot get user's name.", clientException);
         }
