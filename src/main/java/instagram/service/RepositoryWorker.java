@@ -5,24 +5,25 @@ import instagram.entity.Role;
 import instagram.entity.Subscriber;
 import instagram.entity.User;
 import instagram.repository.InstagramProfileRepo;
-import instagram.repository.SubscribersRepo;
+import instagram.repository.SubscriprionsRepo;
 import instagram.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import me.postaddict.instagram.scraper.model.Media;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class RepositoryWorker {
     private final UserRepo userRepo;
     private final InstagramProfileRepo profileRepo;
-    private final SubscribersRepo subscribersRepo;
+    private final SubscriprionsRepo subscribersRepo;
     private final InstagramFollowersWorker followersWorker;
     private final InstagramMediaWorker instagramMediaWorker;
 
@@ -56,7 +57,7 @@ public class RepositoryWorker {
         profileRepo.save(instaUser);
     }
 
-    public void saveSubscribers(List<String> subscribers, InstagramProfile instagramProfile) {
+    public void saveSubscriptions(List<String> subscribers, InstagramProfile instagramProfile) {
         for (String nick : subscribers) {
             if (subscribersRepo.findByName(nick) == null) {
                 Subscriber item = new Subscriber(nick, instagramProfile);
@@ -65,7 +66,7 @@ public class RepositoryWorker {
         }
     }
 
-    public List<String> getFollowers(String login, String password) throws IOException {
+    public List<String> getFollowing(String login, String password) throws IOException {
         List<String> subscribers = followersWorker.getFollowers(login, password);
         return subscribers;
     }
@@ -85,5 +86,22 @@ public class RepositoryWorker {
         InstagramProfile profile = this.getInstagramProfile(id);
         profile.setLogin(login);
         profileRepo.save(profile);
+    }
+
+    public List<String> getCurrentSubscriptions(long id) {
+        InstagramProfile profile = this.getInstagramProfile(id);
+        List<Subscriber> subscribeItems = subscribersRepo.findAllByProfileId(profile.getId());
+        return subscribeItems
+                .stream()
+                .map(subscriber -> subscriber.getName())
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteSubscriptions(List<String> checkedItems, long id) {
+        InstagramProfile profile = this.getInstagramProfile(id);
+        for(String name: checkedItems){
+            subscribersRepo.deleteByProfileIdAndName(profile.getId(),name);
+        }
     }
 }
