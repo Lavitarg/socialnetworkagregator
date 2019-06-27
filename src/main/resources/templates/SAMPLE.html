@@ -60,15 +60,23 @@
 
 
     <!-- div для постов -->
-    <div class="card" style="width: 18rem;">
-        <img src="#" class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">Text</p>
-        </div>
-    </div>
 
+    <th:block th:each="post : ${posts}">
 
+            <h2 th:text="${post.getOwner().getName()}">Name</h2>
+            <div class="card" style="width: 18rem;">
+                <img th:src="" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">
+                    <h2 th:text="${post.getText()}">Text</h2>
+                    </p>
+                </div>
+            </div>
+            <tr>
+                <td th:text="${#dates.format(post.getTimestamp(), 'dd-MMM-yyyy')}">Time</td>
+            </tr>
 
+    </th:block>
 
 </div>
 </body>
