@@ -1,6 +1,7 @@
 package instagram.service.impl;
 
 import instagram.Exeptions.UnableToAuthorizeException;
+import instagram.model.VKProfiledUserActor;
 import instagram.repository.VKUsersRepository;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -41,12 +42,9 @@ public class VKAuthorizationServiceImpl implements VKAuthorizationService {
             UserSettings infoResponse = vk.account()
                     .getProfileInfo(new UserActor(authResponse.getUserId(), authResponse.getAccessToken()))
                     .execute();
-            /*VKProfiledUserActor user = VKProfiledUserActor.builder()
-                    .build()
-                    .userId(authResponse.getUserId())
-                    .accessToken(authResponse.getAccessToken())
-                    .name(infoResponse.getFirstName() + " " + infoResponse.getLastName());
-            repository.save(user);*/
+            String name = infoResponse.getFirstName() + infoResponse.getLastName();
+            VKProfiledUserActor user = new VKProfiledUserActor(authResponse.getUserId(), authResponse.getAccessToken(), name);
+            repository.save(user);
         } catch (ApiException apiException) {
             throw new UnableToAuthorizeException("Cannot get user's name.", apiException);
         } catch (ClientException clientException) {
