@@ -1,8 +1,7 @@
 package instagram.service.implementation;
 
-import instagram.service.InstagramFollowersWorker;
+import instagram.service.InstagramFollowingsWorker;
 import org.brunocvcunha.instagram4j.Instagram4j;
-import org.brunocvcunha.instagram4j.requests.InstagramGetUserFollowersRequest;
 import org.brunocvcunha.instagram4j.requests.InstagramGetUserFollowingRequest;
 import org.brunocvcunha.instagram4j.requests.InstagramSearchUsernameRequest;
 import org.brunocvcunha.instagram4j.requests.payload.InstagramGetUserFollowersResult;
@@ -11,11 +10,10 @@ import org.brunocvcunha.instagram4j.requests.payload.InstagramUserSummary;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
-public class FollowersDownLoaderImpl implements InstagramFollowersWorker {
+public class FollowingsDownLoaderImpl implements InstagramFollowingsWorker {
     @Override
     public List<String> getFollowers(String name, String password) throws IOException {
         Instagram4j instagram = Instagram4j.builder().username(name).password(password).build();

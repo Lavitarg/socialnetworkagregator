@@ -24,7 +24,7 @@ public class RepositoryWorker {
     private final UserRepo userRepo;
     private final InstagramProfileRepo profileRepo;
     private final SubscriprionsRepo subscribersRepo;
-    private final InstagramFollowersWorker followersWorker;
+    private final InstagramFollowingsWorker followersWorker;
     private final InstagramMediaWorker instagramMediaWorker;
 
     public boolean checkIfUserExist(String name) {
