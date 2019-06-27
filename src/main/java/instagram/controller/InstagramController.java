@@ -59,6 +59,7 @@ public class InstagramController {
         }
         List<Media> result = repositoryWorker.getMediaByUserId(user.getId());
         model.addAttribute("mediaList", result);
+        model.addAttribute("login",repositoryWorker.getInstagramProfile(user.getId()).getLogin());
         return "tape";
     }
 
@@ -66,7 +67,7 @@ public class InstagramController {
     public String newProfile(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("helper", new NameChanger());
         model.addAttribute("text", "Add new Profile");
-        return "loginChanger";
+        return "addAccount";
     }
 
     @PostMapping(value = "/newInstagramProfile")
@@ -93,7 +94,7 @@ public class InstagramController {
         }
         model.addAttribute("helper", new NameChanger());
         model.addAttribute("text", "Change login");
-        return "loginChanger";
+        return "changeLogin";
     }
 
     // We have some bad solution is here((((((( doesn't work
