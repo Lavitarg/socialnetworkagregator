@@ -22,4 +22,9 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping(value = "/sample",  method = RequestMethod.GET)
+    public String sample(Model model) {
+        return "SAMPLE";
+    }
+
 }
