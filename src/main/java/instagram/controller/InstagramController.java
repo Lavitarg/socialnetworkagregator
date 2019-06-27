@@ -6,6 +6,7 @@ import instagram.entity.User;
 import instagram.model.*;
 
 import instagram.service.RepositoryWorker;
+import lombok.RequiredArgsConstructor;
 import me.postaddict.instagram.scraper.model.Media;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,9 +20,9 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class InstagramController {
-    @Autowired
-    private RepositoryWorker repositoryWorker;
+    private final RepositoryWorker repositoryWorker;
 
     @GetMapping(value = "/filter")
     public String greeting(@AuthenticationPrincipal User user, Model model) throws IOException {

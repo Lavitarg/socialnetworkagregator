@@ -7,6 +7,7 @@ import instagram.entity.User;
 import instagram.repository.InstagramProfileRepo;
 import instagram.repository.SubscribersRepo;
 import instagram.repository.UserRepo;
+import lombok.RequiredArgsConstructor;
 import me.postaddict.instagram.scraper.model.Media;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,17 +18,13 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RepositoryWorker {
-    @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    private InstagramProfileRepo profileRepo;
-    @Autowired
-    private SubscribersRepo subscribersRepo;
-    @Autowired
-    private InstagramFollowersWorker followersWorker;
-    @Autowired
-    private InstagramMediaWorker instagramMediaWorker;
+    private final UserRepo userRepo;
+    private final InstagramProfileRepo profileRepo;
+    private final SubscribersRepo subscribersRepo;
+    private final InstagramFollowersWorker followersWorker;
+    private final InstagramMediaWorker instagramMediaWorker;
 
     public boolean checkIfUserExist(String name) {
         User userByName = userRepo.findByUsername(name);
