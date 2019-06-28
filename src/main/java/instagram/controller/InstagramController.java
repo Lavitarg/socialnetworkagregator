@@ -89,7 +89,7 @@
             List<Media> result = postService.getMediaByUserId(user.getId());
             model.addAttribute("mediaList", result);
             model.addAttribute("login", postService.getInstagramProfile(user.getId()).getLogin());
-            return "feed";
+            return "tape";
         }
 
         //Меппинг для страницы добавления нового профиля instagram

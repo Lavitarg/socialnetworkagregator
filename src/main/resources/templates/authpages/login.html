@@ -22,11 +22,6 @@
     <p th:text="${message}"></p>
 </div>
 
-<!--<form th:action="@{/login}" method="post">-->
-    <!--<div><label> User Name : <input type="text" name="username"/> </label></div>-->
-    <!--<div><label> Password: <input type="password" name="password"/> </label></div>-->
-    <!--<div><input type="submit" value="Sign In"/></div>-->
-<!--</form>-->
 <div class="container">
 <div class="row">
     <!--Форма, отправляющая post-запрос на адрес /users с
@@ -47,9 +42,8 @@
             </div>
         </form>
     </div>
-
+    <label><a th:href="@{/registration}">add new user</a></label>
 </div><!-- /.row -->
 </div><!-- /.container -->
-<p>Click <a th:href="@{/registration}">here</a> to add new user.</p>
 </body>
 </html>
