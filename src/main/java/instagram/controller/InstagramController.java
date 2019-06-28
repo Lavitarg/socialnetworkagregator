@@ -5,8 +5,10 @@
 
     import instagram.model.*;
 
+    import instagram.service.InstagramFollowingsWorker;
     import instagram.service.PostService;
     import instagram.service.RepositoryWorker;
+    import instagram.service.implementation.FollowingsDownLoaderImpl;
     import lombok.RequiredArgsConstructor;
     import me.postaddict.instagram.scraper.model.Media;
     import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,7 +26,7 @@
     public class InstagramController {
         private final RepositoryWorker repositoryWorker;
         private final PostService postService;
-
+        private final InstagramFollowingsWorker followingsWorker;
         //Меппинг для удаления существующих подписок в фильтрации
         @GetMapping(value = "/oldSubs")
         public String prefilter(@AuthenticationPrincipal User user, Model model) throws IOException {
@@ -135,4 +137,6 @@
             repositoryWorker.changeProfileLoginByOwnerId(user.getId(), changer.getName());
             return "redirect:/instagram";
         }
+
+
     }

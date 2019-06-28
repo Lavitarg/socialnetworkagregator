@@ -12,13 +12,13 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class InstagramPost extends Post {
-    private String desctiption;
+    private String description;
     private long likes;
     private String url;
     private String originalLink;
     public InstagramPost(Media media){
         this.timestamp = media.getCreated();
-        this.desctiption = media.getCaption();
+        this.description = media.getCaption();
         this.likes = media.getLikeCount();
         this.url = media.getDisplayUrl();
         this.originalLink = "https://www.instagram.com/p/" + media.getShortcode();

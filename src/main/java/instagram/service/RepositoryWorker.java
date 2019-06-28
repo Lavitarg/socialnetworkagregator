@@ -67,7 +67,7 @@ public class RepositoryWorker {
     }
 
     public List<String> getFollowing(String login, String password) throws IOException {
-        List<String> subscribers = followersWorker.getFollowers(login, password);
+        List<String> subscribers = followersWorker.getFollowingsNames(login, password);
         return subscribers;
     }
 
