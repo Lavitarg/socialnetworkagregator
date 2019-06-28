@@ -21,7 +21,7 @@ public class VkProfiledUserActor extends UserActor {
     private String name;
 
     @Builder
-    public VkProfiledUserActor(Integer userId, String accessToken, String firstname, String lastname) {
+    public VkProfiledUserActor(Integer userId, String accessToken, String name) {
         super(userId, accessToken);
         this.name = name;
     }

@@ -3,6 +3,6 @@ package instagram.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface AuthorizationService{
+public interface VkAuthorizationService {
     void authorize(String code);
 }

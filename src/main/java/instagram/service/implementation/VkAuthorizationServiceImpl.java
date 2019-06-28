@@ -1,4 +1,4 @@
-package instagram.service;
+package instagram.service.implementation;
 
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -7,21 +7,26 @@ import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.UserAuthResponse;
-import com.vk.api.sdk.objects.account.UserSettings;
-import instagram.repository.UsersRepository;
+import com.vk.api.sdk.objects.users.UserXtrCounters;
+import instagram.model.VkProfiledUserActor;
+import instagram.repository.VkUserRepository;
+import instagram.exception.UnableToAuthorizeException;
+import instagram.service.VkAuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class AuthorizationServiceImpl implements AuthorizationService {
-    private final Integer appId = 7033540;
+public class VkAuthorizationServiceImpl implements VkAuthorizationService {
+    private final Integer appId = 7036814;
 
-    private final String key = "VoDvwVOcnzTmuYgsi7FG";
+    private final String key = "MlbwUPOmPcLPtzqruB4h";
 
-    private final String redirectUri = "http://localhost:8080/getcode";
+    private final String redirectUri = "http://8008264e.ngrok.io/getvkcode";
 
     @Autowired
-    private UsersRepository repository;
+    private VkUserRepository repository;
 
     @Override
     public void authorize(String code) {
@@ -37,20 +42,18 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         } catch (ClientException clientException) {
             throw new UnableToAuthorizeException("Cannot get access token", clientException);
         }
+        List<UserXtrCounters> infoResponse = null;
         try {
-            UserSettings infoResponse = vk.account()
-                    .getProfileInfo(new UserActor(authResponse.getUserId(), authResponse.getAccessToken()))
+            infoResponse = vk.users().get(new UserActor(authResponse.getUserId(), authResponse.getAccessToken()))
                     .execute();
-            /*VkProfiledUserActor user = VkProfiledUserActor.builder()
-                    .build()
-                    .userId(authResponse.getUserId())
-                    .accessToken(authResponse.getAccessToken())
-                    .name(infoResponse.getFirstName() + " " + infoResponse.getLastName());
-            repository.save(user);*/
-        } catch (ApiException apiException) {
-            throw new UnableToAuthorizeException("Cannot get user's name.", apiException);
-        } catch (ClientException clientException) {
-            throw new UnableToAuthorizeException("Cannot get user's name.", clientException);
+        } catch (ApiException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
         }
+        String name = infoResponse.get(0).getFirstName() + infoResponse.get(0).getLastName();
+        System.out.println(name);
+        VkProfiledUserActor user = new VkProfiledUserActor(authResponse.getUserId(), authResponse.getAccessToken(), name);
+        repository.save(user);
     }
 }
