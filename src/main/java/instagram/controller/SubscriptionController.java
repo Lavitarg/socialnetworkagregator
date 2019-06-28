@@ -1,6 +1,5 @@
 package instagram.controller;
 
-import instagram.entity.InstagramProfile;
 import instagram.entity.User;
 import instagram.model.InstagramSubscription;
 import instagram.model.SubsChangeObject;
@@ -40,7 +39,7 @@ public class SubscriptionController {
         List<InstagramSubscription> subscribers = followingsWorker.getListOfSubscriptions(helper.getLogin(), helper.getPassword());
         model.addAttribute("filter", new SubsFilter());
         model.addAttribute("subs", subscribers);
-        return "check";
+        return "instagramSubscription";
     }
 
 }

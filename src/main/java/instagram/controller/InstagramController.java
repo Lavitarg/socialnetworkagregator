@@ -8,7 +8,6 @@
     import instagram.service.InstagramFollowingsWorker;
     import instagram.service.PostService;
     import instagram.service.RepositoryWorker;
-    import instagram.service.implementation.FollowingsDownLoaderImpl;
     import lombok.RequiredArgsConstructor;
     import me.postaddict.instagram.scraper.model.Media;
     import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -60,7 +59,7 @@
             List<String> subscribers = repositoryWorker.getFollowing(helper.getLogin(), helper.getPassword());
             model.addAttribute("filter", new SubsFilter());
             model.addAttribute("subs", subscribers);
-            return "check";
+            return "instagramSubscription";
         }
 
         //Меппинг сохраняет выбранные подписки в текущую фильтрацию
