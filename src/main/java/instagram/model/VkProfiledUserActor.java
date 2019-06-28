@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "actor")
-public class ProfiledUserActor extends UserActor {
+public class VkProfiledUserActor extends UserActor {
     @Id
     @GeneratedValue
     private Integer id;
@@ -21,7 +21,7 @@ public class ProfiledUserActor extends UserActor {
     private String name;
 
     @Builder
-    public ProfiledUserActor(Integer userId, String accessToken, String firstname, String lastname) {
+    public VkProfiledUserActor(Integer userId, String accessToken, String firstname, String lastname) {
         super(userId, accessToken);
         this.name = name;
     }

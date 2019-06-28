@@ -5,6 +5,7 @@
 
     import instagram.model.*;
 
+    import instagram.service.PostService;
     import instagram.service.RepositoryWorker;
     import lombok.RequiredArgsConstructor;
     import me.postaddict.instagram.scraper.model.Media;
@@ -22,6 +23,7 @@
     @RequiredArgsConstructor
     public class InstagramController {
         private final RepositoryWorker repositoryWorker;
+        private final PostService postService;
 
         @GetMapping(value = "/oldSubs")
         public String prefilter(@AuthenticationPrincipal User user, Model model) throws IOException {
@@ -108,6 +110,13 @@
             model.addAttribute("helper", new NameChanger());
             model.addAttribute("text", "Change login");
             return "changeLogin";
+        }
+
+        @GetMapping(value = "/checkIfPostServiceWorks")
+        public String check(@AuthenticationPrincipal User user, Model model) throws IOException {
+            List<InstagramPost> posts = postService.getPostByUserId(user.getId());
+            System.out.println();
+            return "main";
         }
 
         // We have some bad solution is here((((((( doesn't work
