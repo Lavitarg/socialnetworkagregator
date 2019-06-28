@@ -41,10 +41,13 @@ public class InstagramMediaWorkerImpl implements InstagramMediaWorker {
         List<Media> resultMedias = (ArrayList<Media>) medias.getNodes();
 
         if(resultMedias == null || resultMedias.size() == 0) return Collections.emptyList();
-        resultMedias = resultMedias
+
+
+        /*resultMedias = resultMedias
                 .stream()
                 .filter(media -> media.getTakenAtTimestamp() >= this.getDate())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
+
         //не всегда достаются ссылки на video,поэтому приходится обрабатывать Runtime очень плохо
         resultMedias = resultMedias
                 .stream()
