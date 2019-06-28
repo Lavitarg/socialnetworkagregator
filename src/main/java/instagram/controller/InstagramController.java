@@ -53,13 +53,19 @@
             return "filter";
         }
 
+
         //Меппинг достаёт подписки из инстаграма для добавления их в форму с чекбоксами
         @PostMapping(value = "/filter")
         public String filterSubmit(@AuthenticationPrincipal User user,
                                    @ModelAttribute SubsChangeObject helper, Model model) throws IOException {
-            List<String> subscribers = repositoryWorker.getFollowing(helper.getLogin(), helper.getPassword());
-            model.addAttribute("filter", new SubsFilter());
-            model.addAttribute("subs", subscribers);
+            try {
+                List<String> subscribers = repositoryWorker.getFollowing(helper.getLogin(), helper.getPassword());
+                model.addAttribute("filter", new SubsFilter());
+                model.addAttribute("subs", subscribers);
+            }
+            catch (NullPointerException e){
+                return "errorPage";
+            }
             return "check";
         }
 
