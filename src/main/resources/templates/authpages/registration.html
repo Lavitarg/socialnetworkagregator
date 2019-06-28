@@ -2,7 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>Registration</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 <div th:if="${param.error}">
@@ -11,10 +21,30 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/registration}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign up"/></div>
-</form>
+
+<div class="container">
+<div class="row">
+    <!--Форма, отправляющая post-запрос на адрес /users с
+    телом запроса, в котором будут параметры name и surname -->
+    <div class="col-md-offset-3 col-md-6">
+        <form class="form-horizontal" method="post" th:action="@{/registration}">
+            <span class="heading">registration</span>
+            <div class="form-group">
+                <input type="text" id='name-input' name="username" class="form-control" placeholder="username">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="form-group help">
+                <input id='surname-input' type="password" name="password" class="form-control" placeholder="password">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">подтвердить</button>
+            </div>
+        </form>
+
+    </div>
+</div><!-- /.row -->
+</div><!-- /.container -->
+
 </body>
 </html>

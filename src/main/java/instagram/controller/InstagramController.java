@@ -8,6 +8,7 @@
     import instagram.service.InstagramFollowingsWorker;
     import instagram.service.PostService;
     import instagram.service.RepositoryWorker;
+    import instagram.service.implementation.FollowingsDownLoaderImpl;
     import lombok.RequiredArgsConstructor;
     import me.postaddict.instagram.scraper.model.Media;
     import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -52,14 +53,20 @@
             return "filter";
         }
 
+
         //Меппинг достаёт подписки из инстаграма для добавления их в форму с чекбоксами
         @PostMapping(value = "/filter")
         public String filterSubmit(@AuthenticationPrincipal User user,
                                    @ModelAttribute SubsChangeObject helper, Model model) throws IOException {
-            List<String> subscribers = repositoryWorker.getFollowing(helper.getLogin(), helper.getPassword());
-            model.addAttribute("filter", new SubsFilter());
-            model.addAttribute("subs", subscribers);
-            return "instagramSubscription";
+            try {
+                List<String> subscribers = repositoryWorker.getFollowing(helper.getLogin(), helper.getPassword());
+                model.addAttribute("filter", new SubsFilter());
+                model.addAttribute("subs", subscribers);
+            }
+            catch (NullPointerException e){
+                return "errorPage";
+            }
+            return "check";
         }
 
         //Меппинг сохраняет выбранные подписки в текущую фильтрацию
@@ -82,7 +89,7 @@
             List<Media> result = postService.getMediaByUserId(user.getId());
             model.addAttribute("mediaList", result);
             model.addAttribute("login", postService.getInstagramProfile(user.getId()).getLogin());
-            return "feed";
+            return "tape";
         }
 
         //Меппинг для страницы добавления нового профиля instagram
@@ -122,13 +129,14 @@
             model.addAttribute("text", "Change login");
             return "changeLogin";
         }
-        //Быстрый тест сервиса для генерации постов
+
+        /*//Быстрый тест сервиса для генерации постов
         @GetMapping(value = "/checkIfPostServiceWorks")
         public String check(@AuthenticationPrincipal User user, Model model) throws IOException {
             List<InstagramPost> posts = postService.getPostByUserId(user.getId());
             System.out.println();
             return "main";
-        }
+        }*/
 
         //Меппинг для сохранения изменения в названии аккаунта
         @PostMapping(value = "/changeNick")
