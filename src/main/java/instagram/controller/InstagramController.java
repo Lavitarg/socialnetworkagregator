@@ -129,13 +129,14 @@
             model.addAttribute("text", "Change login");
             return "changeLogin";
         }
-        //Быстрый тест сервиса для генерации постов
+
+        /*//Быстрый тест сервиса для генерации постов
         @GetMapping(value = "/checkIfPostServiceWorks")
         public String check(@AuthenticationPrincipal User user, Model model) throws IOException {
             List<InstagramPost> posts = postService.getPostByUserId(user.getId());
             System.out.println();
             return "main";
-        }
+        }*/
 
         //Меппинг для сохранения изменения в названии аккаунта
         @PostMapping(value = "/changeNick")

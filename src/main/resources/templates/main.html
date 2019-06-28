@@ -5,7 +5,9 @@
 </head>
 <body>
 <h1>Welcome!</h1>
+<script th:inline="javascript">
+    location.href='/feed';
+</script>
 
-<p>Click <a th:href="@{/home}">here</a> to see a greeting.</p>
 </body>
 </html>
