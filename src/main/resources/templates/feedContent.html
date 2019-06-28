@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--Шаблон для HTML файлов, вклчает Bootstrap и jQuery-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Sample</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-sm-5 col-md-6"></div>
+    <th:block th:each="post : ${instagramPosts}">
+
+        <h2 th:text="${post.getOwner().getName()}">Name</h2>
+        <div class="card" style="width: 18rem;">
+            <img th:if="${post.getUrl}" th:src="${post.getUrl}"
+                 class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">
+                <h2 th:text="${post.getDescription()}">Text</h2>
+                </p>
+            </div>
+        </div>
+        <tr>
+            <td th:text="${#dates.format(post.getTimestamp(), 'dd-MMM-yyyy')}">Time</td>
+        </tr>
+
+    </th:block>
+    <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0"></div>
+</div>
+</body>
+</html>
