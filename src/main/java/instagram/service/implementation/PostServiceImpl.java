@@ -26,6 +26,7 @@ public class PostServiceImpl implements PostService {
     private final SubscriprionsRepo subscribersRepo;
     private final InstagramMediaWorker instagramMediaWorker;
 
+    @Override
     public InstagramProfile getInstagramProfile(Long id) {
         return profileRepo.findByUserId(id);
     }

@@ -25,6 +25,7 @@
         private final RepositoryWorker repositoryWorker;
         private final PostService postService;
 
+        //Меппинг для удаления существующих подписок в фильтрации
         @GetMapping(value = "/oldSubs")
         public String prefilter(@AuthenticationPrincipal User user, Model model) throws IOException {
             List<String> subscribers = repositoryWorker.getCurrentSubscriptions(user.getId());
@@ -33,6 +34,7 @@
             return "changeCurrentFilter";
         }
 
+        //Обработка формы с удаляемыми из фильтрации подписками
         @PostMapping(value = "/oldSubs")
         public String preFilterSubmit(@AuthenticationPrincipal User user,
                                    @ModelAttribute SubsFilter filter, Model model) throws IOException {
@@ -40,6 +42,7 @@
             return "redirect:/instagram";
         }
 
+        //Меппинг для считывание логина и пароля, чтобы достать список подписок
         @GetMapping(value = "/filter")
         public String filter(@AuthenticationPrincipal User user, Model model) throws IOException {
             String name = repositoryWorker.getInstagramProfileNameByOwnerId(user.getId());
@@ -48,6 +51,7 @@
             return "filter";
         }
 
+        //Меппинг достаёт подписки из инстаграма для добавления их в форму с чекбоксами
         @PostMapping(value = "/filter")
         public String filterSubmit(@AuthenticationPrincipal User user,
                                    @ModelAttribute SubsChangeObject helper, Model model) throws IOException {
@@ -57,6 +61,7 @@
             return "check";
         }
 
+        //Меппинг сохраняет выбранные подписки в текущую фильтрацию
         @PostMapping(value = "/processForm")
         public String processForm(@AuthenticationPrincipal User user,
                                   @ModelAttribute(value = "foo") SubsFilter filter, Model model) throws IOException {
@@ -66,18 +71,20 @@
             return "redirect:/instagram";
         }
 
-        @GetMapping(value = "/tape")
+        //Меппинг для генерации ленты с помощью id авторизованного пользователя
+        @GetMapping(value = "/feed")
         public String tape(@AuthenticationPrincipal User user, Model model) throws IOException {
             boolean exist = repositoryWorker.checkIfInstagramProfileExistsByOwnerId(user.getId());
             if (!exist) {
                 return "redirect:/newInstagramProfile";
             }
-            List<Media> result = repositoryWorker.getMediaByUserId(user.getId());
+            List<Media> result = postService.getMediaByUserId(user.getId());
             model.addAttribute("mediaList", result);
-            model.addAttribute("login", repositoryWorker.getInstagramProfile(user.getId()).getLogin());
-            return "tape";
+            model.addAttribute("login", postService.getInstagramProfile(user.getId()).getLogin());
+            return "feed";
         }
 
+        //Меппинг для страницы добавления нового профиля instagram
         @GetMapping(value = "/newInstagramProfile")
         public String newProfile(@AuthenticationPrincipal User user, Model model) {
             model.addAttribute("helper", new NameChanger());
@@ -85,12 +92,14 @@
             return "addAccount";
         }
 
+        //Мепинг для сохранения добавленного пользователя
         @PostMapping(value = "/newInstagramProfile")
         public String newProfileSaver(@AuthenticationPrincipal User user, @ModelAttribute NameChanger helper, Model model) {
             repositoryWorker.saveInstagramProfile(helper.getName(), user);
             return "redirect:/instagram";
         }
 
+        //Меппинг для просмотра доступного функционала instagram модуля
         @GetMapping(value = "/instagram")
         public String instagramMenu(@AuthenticationPrincipal User user, Model model) {
             boolean exist = repositoryWorker.checkIfInstagramProfileExistsByOwnerId(user.getId());
@@ -101,6 +110,7 @@
             return "instagramMenu";
         }
 
+        //Меппинг для смены названия аккаунтаю
         @GetMapping(value = "/changeNick")
         public String changeNickName(@AuthenticationPrincipal User user, Model model) {
             boolean exist = repositoryWorker.checkIfInstagramProfileExistsByOwnerId(user.getId());
@@ -111,7 +121,7 @@
             model.addAttribute("text", "Change login");
             return "changeLogin";
         }
-
+        //Быстрый тест сервиса для генерации постов
         @GetMapping(value = "/checkIfPostServiceWorks")
         public String check(@AuthenticationPrincipal User user, Model model) throws IOException {
             List<InstagramPost> posts = postService.getPostByUserId(user.getId());
@@ -119,7 +129,7 @@
             return "main";
         }
 
-        // We have some bad solution is here((((((( doesn't work
+        //Меппинг для сохранения изменения в названии аккаунта
         @PostMapping(value = "/changeNick")
         public String changeNickName(@AuthenticationPrincipal User user, @ModelAttribute NameChanger changer, Model model) {
             repositoryWorker.changeProfileLoginByOwnerId(user.getId(), changer.getName());
