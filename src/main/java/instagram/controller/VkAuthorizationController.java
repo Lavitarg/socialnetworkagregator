@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class AuthorizationController {
+public class VkAuthorizationController {
 
     private final Integer appId = 7033540;
 

@@ -41,7 +41,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             UserSettings infoResponse = vk.account()
                     .getProfileInfo(new UserActor(authResponse.getUserId(), authResponse.getAccessToken()))
                     .execute();
-            /*ProfiledUserActor user = ProfiledUserActor.builder()
+            /*VkProfiledUserActor user = VkProfiledUserActor.builder()
                     .build()
                     .userId(authResponse.getUserId())
                     .accessToken(authResponse.getAccessToken())
