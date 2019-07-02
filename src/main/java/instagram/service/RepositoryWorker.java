@@ -27,16 +27,6 @@ public class RepositoryWorker {
     private final InstagramFollowingsWorker followersWorker;
     private final InstagramMediaWorker instagramMediaWorker;
 
-    public boolean checkIfUserExist(String name) {
-        User userByName = userRepo.findByUsername(name);
-        return (userByName != null);
-    }
-
-    public void saveUser(User user) {
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        userRepo.save(user);
-    }
 
     public String getInstagramProfileNameByOwnerId(Long id) {
         InstagramProfile instagramProfile = this.getInstagramProfile(id);

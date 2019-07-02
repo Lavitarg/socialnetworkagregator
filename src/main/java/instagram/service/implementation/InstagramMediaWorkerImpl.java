@@ -56,10 +56,10 @@ public class InstagramMediaWorkerImpl implements InstagramMediaWorker {
                 Media media1 = instagram.getMediaByCode(media.getShortcode());
                 return media1;
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
             }
             catch (RuntimeException e) {
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
             }
             return media;
         }).collect(Collectors.toList());
