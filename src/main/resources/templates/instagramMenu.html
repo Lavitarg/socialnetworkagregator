@@ -2,14 +2,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Home</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>Welcome, <strong th:text="${name}"></strong></h1>
 
-<p>Click <a th:href="@{/newInstagramProfile}">here</a> to add new Instagram account</p>
-<p>Click <a th:href="@{/changeNick}">here</a> to change the account nick</p>
-<p>Click <a th:href="@{/filter}">here</a> to change the subscribers filtration</p>
-<p>Click <a th:href="@{/feed}">here</a> to see the tape</p>
-<p>Click <a th:href="@{/oldSubs}">here</a> to change current subscriptions</p>
+<div class="container">
+    <div class="row">
+        <!--Форма, отправляющая post-запрос на адрес /users с
+        телом запроса, в котором будут параметры name и surname -->
+        <div class="col-md-offset-3 col-md-6">
+            <h1>Welcome, <strong th:text="${name}"></strong></h1>
+            <p>Click <a th:href="@{/newInstagramProfile}">here</a> to add new Instagram account</p>
+            <p>Click <a th:href="@{/changeNick}">here</a> to change the account nick</p>
+            <p>Click <a th:href="@{/filter}">here</a> to change the subscribers filtration</p>
+            <p>Click <a th:href="@{/feed}">here</a> to see the tape</p>
+            <p>Click <a th:href="@{/oldSubs}">here</a> to change current subscriptions</p>
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.container -->
 </body>
 </html>

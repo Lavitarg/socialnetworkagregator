@@ -25,31 +25,45 @@
         </div>
     </div>
 </nav></div>
-<h1 th:text="${login}"></h1>
-<th:block th:each="mediaItem : ${mediaList}">
-    <!-<div th:switch="${mediaItem.getIsVideo()}">
-    <div th:case="${false}">
-        <h1 th:text="${mediaItem.getOwner().getUsername()}"></h1>
-        <img th:src="${mediaItem.getDisplayUrl()}"/>
-        <h2 th:text="${mediaItem.getCaption()}"></h2>
-        <tr>
-            <td th:text="${mediaItem.getLikeCount()}"></td>
-            <td th:text="${#dates.format(mediaItem.getCreated(), 'dd-MMM-yyyy')}"></td>
-        </tr>
-        <!--Photo-->
-    </div>
-    <div th:case="${true}">
-        <h1 th:text="${mediaItem.getOwner().getUsername()}"></h1>
-        <video>
-            <source th:src="${mediaItem.getVideoUrl()}">
-        </video>
-        <h2 th:text="${mediaItem.getCaption()}"></h2>
-        <h3 th:text="${mediaItem.getLikeCount()}"></h3>
-        <p th:text="${#dates.format(mediaItem.getCreated(), 'dd-MMM-yyyy')}"></p>
-        <a th:href="${'https://www.instagram.com/p/' + mediaItem.getShortcode()}">Here is a link, if no video on display</a>
-        <!--Video-->
-    </div>
-    </div>
-</th:block>
+<div class="container">
+    <div class="row">
+        <!--Форма, отправляющая post-запрос на адрес /users с
+        телом запроса, в котором будут параметры name и surname -->
+            <h1 th:text="${login}"></h1>
+            <th:block th:each="mediaItem : ${mediaList}">
+                <!-<div th:switch="${mediaItem.getIsVideo()}">
+                <div th:case="${false}">
+                    <div class="container">
+                        <div class="row">
+                    <h1 th:text="${mediaItem.getOwner().getUsername()}"></h1>
+                    <img th:src="${mediaItem.getDisplayUrl()}"/>
+                    <h2 th:text="${mediaItem.getCaption()}"></h2>
+                    <tr>
+                        <td th:text="${mediaItem.getLikeCount()}"></td>
+                        <td th:text="${#dates.format(mediaItem.getCreated(), 'dd-MMM-yyyy')}"></td>
+                    </tr>
+                    </div>
+                    </div>
+                    <!--Photo-->
+                </div>
+                <div th:case="${true}">
+                    <div class="container">
+                        <div class="row">
+                    <h1 th:text="${mediaItem.getOwner().getUsername()}"></h1>
+                    <video>
+                        <source th:src="${mediaItem.getVideoUrl()}">
+                    </video>
+                    <h2 th:text="${mediaItem.getCaption()}"></h2>
+                    <h3 th:text="${mediaItem.getLikeCount()}"></h3>
+                    <p th:text="${#dates.format(mediaItem.getCreated(), 'dd-MMM-yyyy')}"></p>
+                    <a th:href="${'https://www.instagram.com/p/' + mediaItem.getShortcode()}">Here is a link, if no video on display</a>
+
+                        </div>
+                    </div><!--Video-->
+                </div>
+            </div>
+            </th:block>
+    </div><!-- /.row -->
+</div><!-- /.container -->
 </body>
 </html>
