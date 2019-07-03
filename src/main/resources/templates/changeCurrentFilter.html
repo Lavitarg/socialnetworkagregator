@@ -5,13 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Отметьте те подписки, которых Вы больше не хотите видеть в своей ленте</h1>
+<h1>Отметьте те подписки, которые Вы больше не хотите видеть в своей ленте</h1>
 <form action="#" th:action="@{/oldSubs}" th:object="${filter}" method="post">
-    <tr th:each="name, iterStat : ${subs}">
-        <td th:text="${iterStat.count}"></td>
-        <td th:text="${name}">Screen name</td>
-        <p><input type="checkbox" th:field="*{checkedItems}" th:value="${name}" /></p>
-    </tr>
+    <div class="custom-control custom-checkbox" th:each="name, iterStat : ${subs}">
+        <input type="checkbox" class="custom-control-input" th:field="*{checkedItems}" th:value="${name}">
+        <label class="custom-control-label" th:text="${name}"></label>
+    </div>
     <input type="submit" text="Add checked" />
 </form>
 </body>
