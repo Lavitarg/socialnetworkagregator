@@ -8,7 +8,6 @@
     import instagram.service.InstagramFollowingsWorker;
     import instagram.service.PostService;
     import instagram.service.RepositoryWorker;
-    import instagram.service.implementation.FollowingsDownLoaderImpl;
     import lombok.RequiredArgsConstructor;
     import me.postaddict.instagram.scraper.model.Media;
     import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -47,7 +46,7 @@
         //Меппинг для считывание логина и пароля, чтобы достать список подписок
         @GetMapping(value = "/filter")
         public String filter(@AuthenticationPrincipal User user, Model model) throws IOException {
-            String name = repositoryWorker.getInstagramProfileNameByOwnerId(user.getId());
+            String name = repositoryWorker.getInstagramProfileName(user.getId());
             model.addAttribute("nickname", name);
             model.addAttribute("helper", new SubsChangeObject());
             return "filter";
@@ -82,7 +81,7 @@
         //Меппинг для генерации ленты с помощью id авторизованного пользователя
         @GetMapping(value = "/feed")
         public String tape(@AuthenticationPrincipal User user, Model model) throws IOException {
-            boolean exist = repositoryWorker.checkIfInstagramProfileExistsByOwnerId(user.getId());
+            boolean exist = repositoryWorker.checkIfInstagramProfileExists(user.getId());
             if (!exist) {
                 return "redirect:/newInstagramProfile";
             }
@@ -110,24 +109,24 @@
         //Меппинг для просмотра доступного функционала instagram модуля
         @GetMapping(value = "/instagram")
         public String instagramMenu(@AuthenticationPrincipal User user, Model model) {
-            boolean exist = repositoryWorker.checkIfInstagramProfileExistsByOwnerId(user.getId());
+            boolean exist = repositoryWorker.checkIfInstagramProfileExists(user.getId());
             if (!exist) {
                 return "redirect:/newInstagramProfile";
             }
-            model.addAttribute("name", repositoryWorker.getInstagramProfileNameByOwnerId(user.getId()));
+            model.addAttribute("name", repositoryWorker.getInstagramProfileName(user.getId()));
             return "instagramMenu";
         }
 
         //Меппинг для смены названия аккаунтаю
         @GetMapping(value = "/changeNick")
         public String changeNickName(@AuthenticationPrincipal User user, Model model) {
-            boolean exist = repositoryWorker.checkIfInstagramProfileExistsByOwnerId(user.getId());
+            boolean exist = repositoryWorker.checkIfInstagramProfileExists(user.getId());
             if (!exist) {
                 return "redirect:/newInstagramProfile";
             }
             model.addAttribute("helper", new NameChanger());
             model.addAttribute("text", "Change login");
-            return "changeLogin";
+            return "changeInstagramLogin";
         }
 
         /*//Быстрый тест сервиса для генерации постов

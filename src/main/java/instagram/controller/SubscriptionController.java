@@ -26,7 +26,7 @@ public class SubscriptionController {
     //Меппинг для считывание логина и пароля, чтобы достать список подписок
     @GetMapping(value = "/filt")
     public String filt(@AuthenticationPrincipal User user, Model model) throws IOException {
-        String name = repositoryWorker.getInstagramProfileNameByOwnerId(user.getId());
+        String name = repositoryWorker.getInstagramProfileName(user.getId());
         model.addAttribute("nickname", name);
         model.addAttribute("helper", new SubsChangeObject());
         return "testsheet";

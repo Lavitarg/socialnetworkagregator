@@ -28,12 +28,12 @@ public class RepositoryWorker {
     private final InstagramMediaWorker instagramMediaWorker;
 
 
-    public String getInstagramProfileNameByOwnerId(Long id) {
+    public String getInstagramProfileName(Long id) {
         InstagramProfile instagramProfile = this.getInstagramProfile(id);
         return instagramProfile.getLogin();
     }
 
-    public boolean checkIfInstagramProfileExistsByOwnerId(Long id) {
+    public boolean checkIfInstagramProfileExists(Long id) {
         InstagramProfile instagramProfile = this.getInstagramProfile(id);
         return (instagramProfile != null);
     }
@@ -48,8 +48,10 @@ public class RepositoryWorker {
     }
 
     public void saveSubscriptions(List<String> subscribers, InstagramProfile instagramProfile) {
+        List<Subscriber> subscribers1 = subscribersRepo.findAllByProfileId(instagramProfile.getId());
+        List<String> names = subscribers1.stream().map(subscriber -> subscriber.getName()).collect(Collectors.toList());
         for (String nick : subscribers) {
-            if (subscribersRepo.findByName(nick) == null) {
+            if (!names.contains(nick)) {
                 Subscriber item = new Subscriber(nick, instagramProfile);
                 subscribersRepo.save(item);
             }

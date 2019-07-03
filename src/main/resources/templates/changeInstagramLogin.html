@@ -1,19 +1,40 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handing Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Change Nickname</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-<h1 th:text="${text}"></h1>
-<form action="#" th:action="@{/changeNick}" th:object="${helper}" method="post">
-    <p>Login: <input type="text" th:field="*{name}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-</form>
-<div>
-    <form action="/logout" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-</div>
+<!--<form action="#" th:action="@{/changeNick}" th:object="${helper}" method="post">-->
+    <!--<p>Login: <input type="text" th:field="*{name}" /></p>-->
+    <!--<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>-->
+<!--</form>-->
+<div class="container">
+    <div class="row">
+        <!--Форма, отправляющая post-запрос на адрес /users с
+        телом запроса, в котором будут параметры name и surname -->
+        <div class="col-md-offset-3 col-md-6">
+            <form class="form-horizontal" method="post" th:action="@{/changeNick}" th:object="${helper}">
+                <div class="form-group help">
+                    <h1 th:text="${text}"></h1>
+                    <input id='input' type="text" th:field="*{name}" class="form-control" placeholder="login">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Подтвердить</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.container -->
 </body>
 </html>
