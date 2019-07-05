@@ -21,8 +21,7 @@ public class RegistrationController {
     //TODO совместить строки 24 и 25
     @PostMapping(value = "/registration")
     public String addUser(User user, Model model) {
-        boolean wassuccessfull = registrationService.saveUnique(user);
-        if (!wassuccessfull) {
+        if (!registrationService.saveUnique(user)) {
             model.addAttribute("message", "User exists");
             return "authpages/registration";
         }
