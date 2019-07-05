@@ -1,7 +1,6 @@
 package instagram.service;
 
 import instagram.entity.InstagramProfile;
-import instagram.entity.Role;
 import instagram.entity.Subscriber;
 import instagram.entity.User;
 import instagram.repository.InstagramProfileRepo;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +23,7 @@ public class RepositoryWorker {
     private final InstagramProfileRepo profileRepo;
     private final SubscriprionsRepo subscribersRepo;
     private final InstagramFollowingsWorker followersWorker;
-    private final InstagramMediaWorker instagramMediaWorker;
+    private final InstagramMediaService instagramMediaWorker;
 
 
     public String getInstagramProfileName(Long id) {

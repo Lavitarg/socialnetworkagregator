@@ -5,16 +5,15 @@ import instagram.entity.Subscriber;
 import instagram.model.InstagramPost;
 import instagram.repository.InstagramProfileRepo;
 import instagram.repository.SubscriprionsRepo;
-import instagram.repository.UserRepo;
-import instagram.service.InstagramMediaWorker;
+import instagram.service.InstagramMediaService;
 import instagram.service.PostService;
 import lombok.RequiredArgsConstructor;
 import me.postaddict.instagram.scraper.model.Media;
-import org.springframework.jmx.export.naming.IdentityNamingStrategy;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
     private final InstagramProfileRepo profileRepo;
     private final SubscriprionsRepo subscribersRepo;
-    private final InstagramMediaWorker instagramMediaWorker;
+    private final InstagramMediaService instagramMediaWorker;
 
     @Override
     public InstagramProfile getInstagramProfile(Long id) {
@@ -40,6 +39,12 @@ public class PostServiceImpl implements PostService {
             List<Media> mediaList = instagramMediaWorker.getMedia(nick.getName());
             result.addAll(mediaList);
         }
+        result = result.stream().sorted(new Comparator<Media>() {
+            @Override
+            public int compare(Media o1, Media o2) {
+                return (int) (o1.getCreated().getTime()-o2.getCreated().getTime());
+            }
+        }).collect(Collectors.toList());
         return result;
     }
 
