@@ -18,7 +18,7 @@ public class RegistrationController {
     public String registration() {
         return "authpages/registration";
     }
-
+    //TODO совместить строки 24 и 25
     @PostMapping(value = "/registration")
     public String addUser(User user, Model model) {
         boolean wassuccessfull = registrationService.saveUnique(user);

@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class InstagramMediaWorkerImpl implements InstagramMediaWorker {
     //public final String result = "https://www.instagram.com/p/";
+    //TODO убрать комментарий, дать нормальное имя интерфейсу и реализации сервиса
     @Override
     public List<Media> getMedia(String name) throws IOException {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();

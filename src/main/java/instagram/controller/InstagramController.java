@@ -92,6 +92,7 @@
         }
 
         //Меппинг для страницы добавления нового профиля instagram
+        //TODO это же не новый профиль, это же просто отображаемое имя? Убрать вообще этот мапинг и ссылки на него, отображать логин
         @GetMapping(value = "/newInstagramProfile")
         public String newProfile(@AuthenticationPrincipal User user, Model model) {
             model.addAttribute("helper", new NameChanger());
